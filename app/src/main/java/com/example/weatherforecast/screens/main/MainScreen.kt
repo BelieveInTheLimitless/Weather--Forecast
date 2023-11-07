@@ -10,7 +10,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +28,7 @@ import com.example.weatherforecast.data.DataOrException
 import com.example.weatherforecast.model.Weather
 import com.example.weatherforecast.model.WeatherItem
 import com.example.weatherforecast.navigation.WeatherScreens
+import com.example.weatherforecast.screens.settings.SettingsViewModel
 import com.example.weatherforecast.utils.formatDate
 import com.example.weatherforecast.utils.formatDecimals
 import com.example.weatherforecast.widgets.*
@@ -31,13 +37,27 @@ import com.example.weatherforecast.widgets.*
 fun MainScreen(
     navController: NavController,
     mainViewModel: MainViewModel = hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel(),
     city: String?
 ){
     Log.d("TAG", "MainScreen: $city")
 
+    val unitFromDB = settingsViewModel.unitList.collectAsState().value
+    var unit by remember{
+        mutableStateOf("metric")
+    }
+    var isMetric by remember {
+        mutableStateOf(false)
+    }
+
+    if(unitFromDB.isNotEmpty()) {
+        unit = unitFromDB[0].unit
+        isMetric = unit == "metric"
+    }
+
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
         initialValue = DataOrException(loading = true)) {
-        value = mainViewModel.getWeatherData(city = city.toString())
+        value = mainViewModel.getWeatherData(city = city.toString(), units = unit)
     }.value
 
     if (weatherData.loading == true){
@@ -61,13 +81,13 @@ fun MainScaffold(weather: Weather, navController: NavController) {
             Log.d("TAG", "MainScaffold: Button Clicked")
         }
     }) {
-        MainContent(data = weather, weatherItem = weather.list[0])
+        MainContent(data = weather)
     }
 }
 
 
 @Composable
-fun MainContent(data: Weather, weatherItem: WeatherItem) {
+fun MainContent(data: Weather) {
 
     val weatherItem = data.list[0]
 
