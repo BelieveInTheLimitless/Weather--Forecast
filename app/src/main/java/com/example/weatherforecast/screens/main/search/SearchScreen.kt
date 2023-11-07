@@ -1,6 +1,6 @@
 package com.example.weatherforecast.screens.main.search
 
-import android.util.Log
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +28,7 @@ import androidx.navigation.NavController
 import com.example.weatherforecast.navigation.WeatherScreens
 import com.example.weatherforecast.widgets.WeatherAppBar
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun SearchScreen(navController: NavController){
     Scaffold(topBar = {
@@ -66,7 +67,7 @@ fun SearchBar(modifier: Modifier,
     Column{
         CommonTextField(
             valueState = searchQueryState,
-            placeholder = "Pune",
+            placeholder = "Enter Place Name",
             onAction = KeyboardActions {
                 if (!valid) return@KeyboardActions
                 onSearch(searchQueryState.value.trim())
