@@ -1,6 +1,7 @@
 package com.example.weatherforecast.screens.splash
 
 import android.view.animation.OvershootInterpolator
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -31,10 +32,10 @@ import kotlinx.coroutines.delay
 @Composable
 fun WeatherSplashScreen(navController: NavController){
 
-    val defaultCity = "Shivajinagar"
+    val defaultCity = "Bengaluru"
 
     val scale = remember {
-        androidx.compose.animation.core.Animatable(0f)
+        Animatable(0f)
     }
 
     LaunchedEffect(key1 = true, block = {
