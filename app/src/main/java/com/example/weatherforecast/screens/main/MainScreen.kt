@@ -137,7 +137,7 @@ fun MainContent(data: Weather, isMetric: Boolean) {
 
         }
 
-        HumidityWindPressureRow(weather = weatherItem)
+        HumidityWindPressureRow(weather = weatherItem, isMetric = isMetric)
 
         Divider()
 

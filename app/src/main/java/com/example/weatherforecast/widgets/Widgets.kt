@@ -119,7 +119,7 @@ fun SunriseAndSunsetRow(weather: WeatherItem) {
 }
 
 @Composable
-fun HumidityWindPressureRow(weather: WeatherItem) {
+fun HumidityWindPressureRow(weather: WeatherItem, isMetric: Boolean) {
     Row(modifier = Modifier
         .padding(12.dp)
         .fillMaxWidth(),
@@ -131,7 +131,7 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
                 contentDescription = "humidity icon",
                 modifier = Modifier.size(20.dp))
 
-            Text(text = " ${weather.humidity}%",
+            Text(text = " ${weather.humidity} %",
                 style = MaterialTheme.typography.caption)
         }
 
@@ -140,7 +140,7 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
                 contentDescription = "pressure icon",
                 modifier = Modifier.size(20.dp))
 
-            Text(text = " ${weather.pressure}Pa",
+            Text(text = " ${weather.pressure} psi",
                 style = MaterialTheme.typography.caption)
         }
 
@@ -149,7 +149,7 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
                 contentDescription = "wind icon",
                 modifier = Modifier.size(20.dp))
 
-            Text(text = " ${weather.speed}km/h",
+            Text(text = formatDecimals(weather.speed) + if(isMetric) " m/s" else " mph",
                 style = MaterialTheme.typography.caption)
         }
 
