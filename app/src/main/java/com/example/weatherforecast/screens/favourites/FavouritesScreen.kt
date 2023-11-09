@@ -1,6 +1,7 @@
 package com.example.weatherforecast.screens.favourites
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -79,9 +81,15 @@ fun CityRow(favourite: Favourite,
                     style = MaterialTheme.typography.caption)
             }
 
+            val context = LocalContext.current
+
             Icon(imageVector = Icons.Rounded.Delete, contentDescription = "Delete",
                 modifier = Modifier.clickable {
                     favouriteViewModel.deleteFavourite(favourite)
+                    Toast.makeText(
+                        context, "Deleted from Favourites",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 },
                 tint = Color.Red.copy(alpha = 0.3f))
         }
