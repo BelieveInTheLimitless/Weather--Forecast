@@ -19,8 +19,8 @@ An Android app built using Kotlin and Jetpack Compose to demonstrate modern MVVM
 
 ||||
 |:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------:|
-| ![](https://i.imgur.com/Ir6aS4Z.jpg) | ![](https://i.imgur.com/nPBzFXk.jpg) | ![](https://i.imgur.com/HRQpbNo.jpg) |
-| ![](https://i.imgur.com/Tzgm0RT.jpg) | ![](https://i.imgur.com/EtmRi1s.jpg) | ![](https://i.imgur.com/jQi4c8e.jpg) |
+| ![](https://i.imgur.com/ohE3ePO.jpg) | ![](https://i.imgur.com/nPBzFXk.jpg) | ![](https://i.imgur.com/nIoHJw8.jpg) |
+| ![](https://i.imgur.com/Tzgm0RT.jpg) | ![](https://i.imgur.com/EtmRi1s.jpg) | ![](https://i.imgur.com/6bxIdBo.jpg) |
 
 ## 🛠 Built With 
 
