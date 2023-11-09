@@ -47,7 +47,7 @@ fun MainScreen(
         mutableStateOf("metric")
     }
     var isMetric by remember {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
 
     if(unitFromDB.isNotEmpty()) {
@@ -63,14 +63,14 @@ fun MainScreen(
     if (weatherData.loading == true){
         CircularProgressIndicator()
     }else if (weatherData.data != null){
-        MainScaffold(weather = weatherData.data!!, navController)
+        MainScaffold(weather = weatherData.data!!, navController, isMetric = isMetric)
     }
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScaffold(weather: Weather, navController: NavController) {
-    
+fun MainScaffold(weather: Weather, navController: NavController, isMetric: Boolean) {
+
     Scaffold(topBar = {
         WeatherAppBar(title = weather.city.name+", "+weather.city.country,
             navController = navController,
@@ -81,17 +81,24 @@ fun MainScaffold(weather: Weather, navController: NavController) {
             Log.d("TAG", "MainScaffold: Button Clicked")
         }
     }) {
-        MainContent(data = weather)
+        MainContent(data = weather, isMetric = isMetric)
     }
 }
 
 
 @Composable
-fun MainContent(data: Weather) {
+fun MainContent(data: Weather, isMetric: Boolean) {
 
     val weatherItem = data.list[0]
 
     val imageUrl = "https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}.png"
+
+    val unit = if(isMetric){
+        "°C"
+    }
+    else{
+        "°F"
+    }
 
     Column(
         Modifier
@@ -99,7 +106,7 @@ fun MainContent(data: Weather) {
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
-        
+
         Text(text = formatDate(weatherItem.dt),
             style = MaterialTheme.typography.caption,
             fontWeight = FontWeight.SemiBold,
@@ -115,10 +122,10 @@ fun MainContent(data: Weather) {
 
             Column(verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally) {
-                
+
                 WeatherStateImage(imageUrl = imageUrl)
 
-                Text(text = formatDecimals(weatherItem.temp.day) + "°C",
+                Text(text = formatDecimals(weatherItem.temp.day) + unit,
                     color = MaterialTheme.colors.onPrimary,
                     style = MaterialTheme.typography.h4,
                     fontWeight = FontWeight.ExtraBold
@@ -146,11 +153,11 @@ fun MainContent(data: Weather) {
             .fillMaxWidth()
             .fillMaxHeight(),
             shape = RoundedCornerShape(20.dp)) {
-            
+
             LazyColumn(modifier = Modifier
                 .background(color = MaterialTheme.colors.onPrimary)){
                 items(items = data.list){ item: WeatherItem ->
-                    WeatherDetailsRow(weather = item)
+                    WeatherDetailsRow(weather = item, unit = unit)
                 }
             }
         }

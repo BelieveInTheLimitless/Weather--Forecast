@@ -1,8 +1,6 @@
 package com.example.weatherforecast.widgets
 
-import android.text.style.BackgroundColorSpan
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -16,7 +14,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.example.weatherforecast.R
 import com.example.weatherforecast.model.WeatherItem
 import com.example.weatherforecast.utils.formatDate
@@ -25,7 +23,7 @@ import com.example.weatherforecast.utils.formatDecimals
 
 
 @Composable
-fun WeatherDetailsRow(weather: WeatherItem) {
+fun WeatherDetailsRow(weather: WeatherItem, unit: String) {
 
     val imageUrl = "https://openweathermap.org/img/wn/${weather.weather[0].icon}.png"
 
@@ -69,13 +67,13 @@ fun WeatherDetailsRow(weather: WeatherItem) {
                     fontWeight = FontWeight.SemiBold
                 )
                 ){
-                    append(formatDecimals(weather.temp.max) + "°C")
+                    append(formatDecimals(weather.temp.max) + unit)
                 }
                 withStyle(
                     style = SpanStyle(
                         color = Color.LightGray)
                 ){
-                    append(formatDecimals(weather.temp.min) + "°C")
+                    append(formatDecimals(weather.temp.min) + unit)
                 }
             }, modifier = Modifier.padding(end = 15.dp))
         }
@@ -160,8 +158,8 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
 
 @Composable
 fun WeatherStateImage(imageUrl: String) {
-    Image(painter = rememberImagePainter(imageUrl),
+    Image(painter = rememberAsyncImagePainter(imageUrl),
         contentDescription = "icon image" ,
         modifier = Modifier.size(80.dp))
 
-    }
+}
