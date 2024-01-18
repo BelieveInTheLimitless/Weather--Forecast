@@ -1,4 +1,4 @@
-package com.example.weatherforecast.screens.splash
+package com.example.weatherforecast.view.splash
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
@@ -26,27 +26,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.weatherforecast.R
-import com.example.weatherforecast.navigation.WeatherScreens
+import com.example.weatherforecast.model.DefaultCity
+import com.example.weatherforecast.view.WeatherScreens
 import kotlinx.coroutines.delay
 
 @Composable
 fun WeatherSplashScreen(navController: NavController){
-
-    val defaultCity = "Bengaluru"
 
     val scale = remember {
         Animatable(0f)
     }
 
     LaunchedEffect(key1 = true, block = {
-        scale.animateTo(targetValue = 0.9f,
+        scale.animateTo(targetValue = 1f,
                         animationSpec = tween(durationMillis = 800,
                         easing = {
-                            OvershootInterpolator(8f)
+                            OvershootInterpolator(4f)
                                 .getInterpolation(it)
                         }))
                         delay(1000L)
-        navController.navigate(WeatherScreens.MainScreen.name + "/$defaultCity")
+        navController.navigate(WeatherScreens.MainScreen.name + "/${DefaultCity.city}")
         }
     )
 
