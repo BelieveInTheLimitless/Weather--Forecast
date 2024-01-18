@@ -27,7 +27,8 @@ An Android app built using Kotlin and Jetpack Compose to demonstrate modern MVVM
 - [Kotlin](https://developer.android.com/kotlin) - It is a modern statically typed programming language used by over 60% of professional Android developers that helps boost productivity, developer satisfaction, and code safety.
 - [Jetpack Compose](https://developer.android.com/jetpack/compose) - Android’s recommended modern toolkit for building native UI. It simplifies and accelerates UI development on Android. Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs.
 - OpenWeatherMap API
-- Coil (Coroutine Image Loader) - A Kotlin-first image loading library for Android which uses Kotlin Coroutines behind the hood.
+- [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
+- [Coil (Coroutine Image Loader)](https://coil-kt.github.io/coil/compose/) - A Kotlin-first image loading library for Android which uses Kotlin Coroutines behind the hood.
 - [Navigation](https://developer.android.com/guide/navigation) - A set of libraries, a plugin, and tooling that simplifies Android navigation.
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - A dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project
 - [Coroutines](https://developer.android.com/kotlin/coroutines) - A concurrency design pattern that you can use on Android to simplify code that executes asynchronously.
