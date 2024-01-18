@@ -1,4 +1,4 @@
-package com.example.weatherforecast.screens.main
+package com.example.weatherforecast.view.main
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -21,17 +21,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.weatherforecast.data.DataOrException
+import com.example.weatherforecast.model.data.DataOrException
 import com.example.weatherforecast.model.Weather
 import com.example.weatherforecast.model.WeatherItem
-import com.example.weatherforecast.navigation.WeatherScreens
-import com.example.weatherforecast.screens.settings.SettingsViewModel
-import com.example.weatherforecast.utils.formatDate
-import com.example.weatherforecast.utils.formatDecimals
-import com.example.weatherforecast.widgets.*
+import com.example.weatherforecast.view.WeatherScreens
+import com.example.weatherforecast.viewmodel.SettingsViewModel
+import com.example.weatherforecast.model.utils.formatDate
+import com.example.weatherforecast.model.utils.formatDecimals
+import com.example.weatherforecast.view.widgets.HumidityWindPressureRow
+import com.example.weatherforecast.view.widgets.SunriseAndSunsetRow
+import com.example.weatherforecast.view.widgets.WeatherAppBar
+import com.example.weatherforecast.view.widgets.WeatherDetailsRow
+import com.example.weatherforecast.view.widgets.WeatherStateImage
+import com.example.weatherforecast.viewmodel.MainViewModel
 
 @Composable
 fun MainScreen(
@@ -56,7 +62,8 @@ fun MainScreen(
     }
 
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
-        initialValue = DataOrException(loading = true)) {
+        initialValue = DataOrException(loading = true)
+    ) {
         value = mainViewModel.getWeatherData(city = city.toString(), units = unit)
     }.value
 
@@ -64,6 +71,12 @@ fun MainScreen(
         CircularProgressIndicator()
     }else if (weatherData.data != null){
         MainScaffold(weather = weatherData.data!!, navController, isMetric = isMetric)
+    }else{
+        Column(verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = weatherData.e?.localizedMessage!!,
+                textAlign = TextAlign.Center)
+        }
     }
 }
 
@@ -153,10 +166,9 @@ fun MainContent(data: Weather, isMetric: Boolean) {
             .fillMaxWidth()
             .fillMaxHeight(),
             shape = RoundedCornerShape(20.dp)) {
-
             LazyColumn(modifier = Modifier
                 .background(color = MaterialTheme.colors.onPrimary)){
-                items(items = data.list){ item: WeatherItem ->
+                items(items = data.list, key = {data -> data.dt}){ item: WeatherItem ->
                     WeatherDetailsRow(weather = item, unit = unit)
                 }
             }

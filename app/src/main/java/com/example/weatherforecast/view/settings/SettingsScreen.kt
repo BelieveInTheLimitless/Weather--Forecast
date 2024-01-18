@@ -1,4 +1,4 @@
-package com.example.weatherforecast.screens.settings
+package com.example.weatherforecast.view.settings
 
 import android.annotation.SuppressLint
 import android.widget.Toast
@@ -39,7 +39,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.weatherforecast.model.Unit
-import com.example.weatherforecast.widgets.WeatherAppBar
+import com.example.weatherforecast.viewmodel.SettingsViewModel
+import com.example.weatherforecast.view.widgets.WeatherAppBar
 
 
 @OptIn(ExperimentalMaterial3Api::class)
