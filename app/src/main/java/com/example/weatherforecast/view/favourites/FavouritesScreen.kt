@@ -1,6 +1,5 @@
-package com.example.weatherforecast.screens.favourites
+package com.example.weatherforecast.view.favourites
 
-import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,10 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.weatherforecast.model.Favourite
-import com.example.weatherforecast.navigation.WeatherScreens
-import com.example.weatherforecast.widgets.WeatherAppBar
+import com.example.weatherforecast.view.WeatherScreens
+import com.example.weatherforecast.viewmodel.FavouriteViewModel
+import com.example.weatherforecast.view.widgets.WeatherAppBar
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun FavouritesScreen(navController: NavController,
                      favouriteViewModel: FavouriteViewModel = hiltViewModel()){
@@ -36,18 +35,26 @@ fun FavouritesScreen(navController: NavController,
     ){ navController.popBackStack() }
     }) {
         Surface(modifier = Modifier
-            .padding(5.dp)
-            .fillMaxWidth()) {
-            Column(verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                val list = favouriteViewModel.favList.collectAsState().value
-                LazyColumn{
-                    items(items = list){
-                        CityRow(it, navController = navController, favouriteViewModel)
+            .padding(it)
+            .fillMaxSize()) {
+
+            val list = favouriteViewModel.favList.collectAsState().value
+
+            if (list.isEmpty()){
+                Column(verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "No favourites added yet!")
+                }
+            }
+            else{
+                LazyColumn(horizontalAlignment = Alignment.CenterHorizontally){
+                    items(items = list){favourite ->
+                        CityRow(favourite = favourite,
+                            navController = navController,
+                            favouriteViewModel = favouriteViewModel)
                     }
                 }
             }
-
         }
     }
 }
@@ -55,14 +62,15 @@ fun FavouritesScreen(navController: NavController,
 @Composable
 fun CityRow(favourite: Favourite,
             navController: NavController,
-            favouriteViewModel: FavouriteViewModel) {
+            favouriteViewModel: FavouriteViewModel
+) {
     Surface(
         Modifier
             .padding(3.dp)
             .fillMaxWidth()
             .height(50.dp)
             .clickable {
-                navController.navigate(WeatherScreens.MainScreen.name+"/${favourite.city}")
+                navController.navigate(WeatherScreens.MainScreen.name + "/${favourite.city}")
             },
         shape = CircleShape,
         color = Color(0xFF071335)
