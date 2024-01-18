@@ -1,4 +1,4 @@
-package com.example.weatherforecast.widgets
+package com.example.weatherforecast.view.widgets
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -16,16 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.weatherforecast.model.Favourite
-import com.example.weatherforecast.navigation.WeatherScreens
-import com.example.weatherforecast.screens.favourites.FavouriteViewModel
+import com.example.weatherforecast.view.WeatherScreens
+import com.example.weatherforecast.viewmodel.FavouriteViewModel
 
 @Composable
 fun WeatherAppBar(
@@ -51,9 +51,14 @@ fun WeatherAppBar(
 
     TopAppBar(
         title = {
-            Text(text = title,
-                style = TextStyle(fontWeight = FontWeight.SemiBold,
-                    fontSize = 20.sp))
+            Row(modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center) {
+                Text(text = title,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center
+                )
+            }
         },
         modifier = Modifier.padding(7.dp),
         actions = {
@@ -74,7 +79,15 @@ fun WeatherAppBar(
                         contentDescription = "More Icon"
                     )
                 }
-            }else Box {}
+            }
+            else {
+                IconButton(onClick = { /*TODO*/ },
+                    modifier = Modifier.padding(7.dp)) {
+                    Icon(imageVector = Icons.Default.Settings,
+                        contentDescription = "Settings",
+                        tint = Color.Transparent)
+                }
+            }
         },
         navigationIcon = {
             if (icon != null){
@@ -141,7 +154,6 @@ fun WeatherAppBar(
     )
 }
 
-
 @Composable
 fun ShowSettingDropDownMenu(showDialogue: MutableState<Boolean>,
                             navController: NavController) {
@@ -154,11 +166,11 @@ fun ShowSettingDropDownMenu(showDialogue: MutableState<Boolean>,
     Column(modifier = Modifier
         .fillMaxWidth()
         .wrapContentSize(Alignment.TopEnd)
-        .absolutePadding(top = 45.dp, right = 20.dp)) {
+        .absolutePadding(top = 50.dp, right = 30.dp)) {
         DropdownMenu(expanded = expanded,
             onDismissRequest = { expanded = false },
             modifier = Modifier
-                .width(140.dp)
+                .width(150.dp)
                 .background(Color(0xFF071335))) {
             items.forEachIndexed { _, text ->
                 DropdownMenuItem(onClick = {
