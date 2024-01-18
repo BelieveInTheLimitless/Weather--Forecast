@@ -1,4 +1,4 @@
-package com.example.weatherforecast.widgets
+package com.example.weatherforecast.view.widgets
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -17,9 +17,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.weatherforecast.R
 import com.example.weatherforecast.model.WeatherItem
-import com.example.weatherforecast.utils.formatDate
-import com.example.weatherforecast.utils.formatDateTime
-import com.example.weatherforecast.utils.formatDecimals
+import com.example.weatherforecast.model.utils.formatDate
+import com.example.weatherforecast.model.utils.formatDateTime
+import com.example.weatherforecast.model.utils.formatDecimals
 
 
 @Composable

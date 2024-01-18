@@ -1,11 +1,11 @@
-package com.example.weatherforecast.di
+package com.example.weatherforecast.model.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.weatherforecast.data.WeatherDao
-import com.example.weatherforecast.data.WeatherDatabase
-import com.example.weatherforecast.network.WeatherApi
-import com.example.weatherforecast.utils.Constants
+import com.example.weatherforecast.model.data.WeatherDao
+import com.example.weatherforecast.model.data.WeatherDatabase
+import com.example.weatherforecast.model.network.WeatherApi
+import com.example.weatherforecast.model.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,7 +36,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideOpenWeatherApi(): WeatherApi{
+    fun provideOpenWeatherApi(): WeatherApi {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

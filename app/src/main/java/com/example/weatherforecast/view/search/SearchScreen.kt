@@ -1,4 +1,4 @@
-package com.example.weatherforecast.screens.main.search
+package com.example.weatherforecast.view.search
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -25,8 +25,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.weatherforecast.navigation.WeatherScreens
-import com.example.weatherforecast.widgets.WeatherAppBar
+import com.example.weatherforecast.view.WeatherScreens
+import com.example.weatherforecast.view.widgets.WeatherAppBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -43,7 +43,6 @@ fun SearchScreen(navController: NavController){
         Surface{
             Column(verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-
                 SearchBar(modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
@@ -64,7 +63,7 @@ fun SearchBar(modifier: Modifier,
     val valid = remember(searchQueryState.value) {
         searchQueryState.value.trim().isNotEmpty()
     }
-    Column{
+    Column(modifier = modifier){
         CommonTextField(
             valueState = searchQueryState,
             placeholder = "Enter Place Name",

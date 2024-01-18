@@ -1,13 +1,13 @@
-package com.example.weatherforecast.repository
+package com.example.weatherforecast.model.repository
 
 import android.util.Log
-import com.example.weatherforecast.data.DataOrException
+import com.example.weatherforecast.model.data.DataOrException
 import com.example.weatherforecast.model.Weather
-import com.example.weatherforecast.network.WeatherApi
+import com.example.weatherforecast.model.network.WeatherApi
 import javax.inject.Inject
 
 class WeatherRepository @Inject constructor(private val api: WeatherApi) {
-    suspend fun getWeather(cityQuery: String, units: String): DataOrException<Weather, Boolean, Exception>{
+    suspend fun getWeather(cityQuery: String, units: String): DataOrException<Weather, Boolean, Exception> {
         val response = try {
             api.getWeather(query = cityQuery, units = units)
         }catch (e: Exception){

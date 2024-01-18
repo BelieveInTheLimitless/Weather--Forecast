@@ -1,7 +1,7 @@
-package com.example.weatherforecast.network
+package com.example.weatherforecast.model.network
 
 import com.example.weatherforecast.model.Weather
-import com.example.weatherforecast.utils.Constants
+import com.example.weatherforecast.model.utils.Constants
 import retrofit2.http.GET
 import retrofit2.http.Query
 import javax.inject.Singleton

@@ -1,10 +1,10 @@
-package com.example.weatherforecast.screens.settings
+package com.example.weatherforecast.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherforecast.model.Unit
-import com.example.weatherforecast.repository.WeatherDBRepository
+import com.example.weatherforecast.model.repository.WeatherDBRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

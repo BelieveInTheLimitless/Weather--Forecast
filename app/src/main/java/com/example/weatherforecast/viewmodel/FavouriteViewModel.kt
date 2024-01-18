@@ -1,10 +1,10 @@
-package com.example.weatherforecast.screens.favourites
+package com.example.weatherforecast.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherforecast.model.Favourite
-import com.example.weatherforecast.repository.WeatherDBRepository
+import com.example.weatherforecast.model.repository.WeatherDBRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

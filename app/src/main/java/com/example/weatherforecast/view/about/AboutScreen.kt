@@ -1,9 +1,10 @@
-package com.example.weatherforecast.screens.about
+package com.example.weatherforecast.view.about
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -15,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
-import com.example.weatherforecast.widgets.WeatherAppBar
+import com.example.weatherforecast.view.widgets.WeatherAppBar
 
 @Composable
 fun AboutScreen(navController: NavController){
@@ -29,6 +30,7 @@ fun AboutScreen(navController: NavController){
        }
    }) {
        Surface(modifier = Modifier
+           .padding(it)
            .fillMaxWidth()
            .fillMaxHeight()) {
            Column(horizontalAlignment = Alignment.CenterHorizontally,

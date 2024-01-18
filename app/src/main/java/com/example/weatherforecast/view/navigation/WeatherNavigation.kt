@@ -1,4 +1,4 @@
-package com.example.weatherforecast.navigation
+package com.example.weatherforecast.view.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -7,14 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.weatherforecast.screens.about.AboutScreen
-import com.example.weatherforecast.screens.favourites.FavouritesScreen
-import com.example.weatherforecast.screens.main.MainScreen
-import com.example.weatherforecast.screens.main.MainViewModel
-import com.example.weatherforecast.screens.main.search.SearchScreen
-import com.example.weatherforecast.screens.settings.SettingsScreen
-import com.example.weatherforecast.screens.splash.WeatherSplashScreen
-
+import com.example.weatherforecast.view.WeatherScreens
+import com.example.weatherforecast.view.about.AboutScreen
+import com.example.weatherforecast.view.favourites.FavouritesScreen
+import com.example.weatherforecast.view.main.MainScreen
+import com.example.weatherforecast.viewmodel.MainViewModel
+import com.example.weatherforecast.view.search.SearchScreen
+import com.example.weatherforecast.view.settings.SettingsScreen
+import com.example.weatherforecast.view.splash.WeatherSplashScreen
 
 @Composable
 fun WeatherNavigation() {
@@ -24,7 +24,6 @@ fun WeatherNavigation() {
             WeatherSplashScreen(navController = navController)
         }
 
-        //www.google.com/cityname="pune"
         val route = WeatherScreens.MainScreen.name
         composable("$route/{city}",
             arguments = listOf(

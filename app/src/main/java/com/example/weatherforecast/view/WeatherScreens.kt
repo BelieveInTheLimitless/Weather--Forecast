@@ -1,4 +1,4 @@
-package com.example.weatherforecast.navigation
+package com.example.weatherforecast.view
 
 enum class WeatherScreens {
     SplashScreen,

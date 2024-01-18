@@ -1,4 +1,4 @@
-package com.example.weatherforecast.data
+package com.example.weatherforecast.model.data
 
 import androidx.room.*
 import com.example.weatherforecast.model.Favourite

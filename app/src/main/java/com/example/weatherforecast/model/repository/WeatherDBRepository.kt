@@ -1,6 +1,6 @@
-package com.example.weatherforecast.repository
+package com.example.weatherforecast.model.repository
 
-import com.example.weatherforecast.data.WeatherDao
+import com.example.weatherforecast.model.data.WeatherDao
 import com.example.weatherforecast.model.Favourite
 import com.example.weatherforecast.model.Unit
 import kotlinx.coroutines.flow.Flow
